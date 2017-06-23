@@ -1,4 +1,4 @@
-# save-cwd: save the current working directory to a file
+# save-cwd: save your current working directory to a file
 
 # About
 
