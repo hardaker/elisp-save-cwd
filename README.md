@@ -5,14 +5,14 @@
 How many times have you had to type in a long path in a shell to get
 to the directory you were just editing a file while inside emacs?
 
-# Usage in emacs
+## Usage in emacs
 
 	(require 'save-cwd)
 	(setq save-cwd-location "~/.emacs_cwd") ;; the default
 	(setq save-cwd-timer-period 5)  ;; can be 1 and still be efficient, FYI
 	(save-cwd-start)
 
-# Usage in your shell:
+## Usage in your shell:
 
     # cd `cat ~/.emacs_cwd`
 
