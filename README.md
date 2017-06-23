@@ -20,9 +20,26 @@ or put it in an alias:
 
     # cde() {  cd `cat ~/.emacs_cwd` ; echo "changed to `cat ~/.emacs_cwd`" ; }
 
+# Caveats
+
+Will do funky things if invoked in two different emacs processes.  *(But
+why would you use two in the first place???)*
+
 # Other options
 
 **M-x shell:** Sure, you can do `M-x shell` and get a new shell there, but that's
 simply inefficient when you have a bazillion shells, one per
 directory.
 
+**emacsclient:** Three is probably a way to pass a command to
+`emacsclient -e`, but I didn't go that route.  Would probably work
+fine too though.
+
+**Bind to key:** I'll eventually add *(interactive)* to the function
+to optionally "save now" rather than via a timer.  But that would
+require moving the mouse *back* to emacs when you forget to run it
+before switching to a terminal window.
+
+# What I'll take flack for
+
+Leaving emacs in the first place.
