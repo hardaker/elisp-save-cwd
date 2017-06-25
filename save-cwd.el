@@ -34,7 +34,7 @@
   (interactive)
   (when (not save-cwd-timer-object)
     (setq save-cwd-timer-object
-	  (run-with-idle-timer 1 t 'save-cwd-timer))))
+	  (run-with-idle-timer save-cwd-timer-period t 'save-cwd-timer))))
 
 (defun save-cwd-stop ()
   "Stops the process of saving the current working directory to a file"
