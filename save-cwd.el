@@ -44,6 +44,4 @@
     (setq save-cwd-save-directory nil)
     ))
 
-(save-cwd-start)
-(save-cwd-stop)
 (provide 'save-cwd)
