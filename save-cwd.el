@@ -46,3 +46,4 @@
 
 (save-cwd-start)
 (save-cwd-stop)
+(provide 'save-cwd)
