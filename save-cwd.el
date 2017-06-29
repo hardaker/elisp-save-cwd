@@ -2,7 +2,7 @@
 
 ;; Copyright Goes Here
 
-;; Author: Richard Hardacker <email>
+;; Author: Wes Hardacker <opensource@hardakers.net>
 ;; Version: 1.0
 ;; Package-Requires: ()
 ;; Keywords: convenience
