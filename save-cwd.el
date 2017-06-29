@@ -1,3 +1,18 @@
+;;; save-cwd.el --- Save the Current Working Directory to a file
+
+;; Copyright Goes Here
+
+;; Author: Richard Hardacker <email>
+;; Version: 1.0
+;; Package-Requires: ()
+;; Keywords: convenience
+;; URL: https://github.com/hardaker/elisp-save-cwd
+
+;;; Commentary:
+;; 
+
+;;; Code:
+
 (defcustom save-cwd-location "~/.emacs_cwd"
   "Location to save the current buffer directory in."
   :type 'file :group 'editing)
@@ -17,7 +32,7 @@
     (file-name-directory buffer-file-name)))
 
 (defun save-cwd-save-directory (dirname)
-  "Save the current working directory (DIRNAME) to the file from save-cwd-location."
+  "Save the current working directory (DIRNAME) to the file from ‘save-cwd-location’."
   (with-temp-file save-cwd-location (insert dirname))
   (setq *save-cwd-current-directory* save-cwd-cwd))
 
@@ -46,3 +61,5 @@
         (setq *save-cwd-current-directory* nil)))))
 
 (provide 'save-cwd)
+
+;;; save-cwd.el ends here
