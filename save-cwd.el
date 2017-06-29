@@ -1,29 +1,28 @@
 (defcustom save-cwd-location "~/.emacs_cwd"
-  "Location to save the current buffer directory in "
+  "Location to save the current buffer directory in."
   :type 'file :group 'editing)
 
 (defcustom save-cwd-timer-period 5
-  "Number of seconds to wait after being idle to save the current working directory.
+  "Wait this many seconds of idle time before saving CWD.
 
-  The saving process is generally very cheap, so short values (even 1 second) sholud be fine.
-"
+  The saving process is generally very cheap, so short values (even 1 second) sholud be fine."
   :type 'integer :group 'editing)
 
 (defvar *save-cwd-timer-object* nil)
 (defvar *save-cwd-current-directory* nil)
 
 (defun save-cwd-buffer-directory ()
+  "Determine the current directory."
   (when buffer-file-name
     (file-name-directory buffer-file-name)))
 
 (defun save-cwd-save-directory (dirname)
-  "Save the current working directory to the file from save-cwd-location"
+  "Save the current working directory (DIRNAME) to the file from save-cwd-location."
   (with-temp-file save-cwd-location (insert dirname))
   (setq *save-cwd-current-directory* save-cwd-cwd))
 
-(defun save-cwd-timer ()
-  "The meat of the save-cwd effort"
-
+(defun save-cwd-timer-function ()
+  "On idle timer, save the cwd."
   (let ((save-cwd-cwd (save-cwd-buffer-directory)))
     (when (and save-cwd-cwd (not (equal *save-cwd-current-directory* save-cwd-cwd)))
       (save-cwd-save-directory save-cwd-cwd))))
@@ -39,7 +38,7 @@
       (progn
         (when (not *save-cwd-timer-object*)
           (setq *save-cwd-timer-object*
-                (run-with-idle-timer save-cwd-timer-period t 'save-cwd-timer))))
+                (run-with-idle-timer save-cwd-timer-period t #'save-cwd-timer-function))))
     (progn
       (when *save-cwd-timer-object*
         (cancel-timer *save-cwd-timer-object*)
