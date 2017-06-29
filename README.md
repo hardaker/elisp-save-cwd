@@ -43,3 +43,12 @@ before switching to a terminal window.
 # What I'll take flack for
 
 Leaving emacs in the first place.
+
+# With Thanks To ...
+
+Thanks a bunch to the following people that help contribute code
+and/or ideas to this project:
+
+  - Samuel W. Flint <swflint@flintfam.org>
+
+
