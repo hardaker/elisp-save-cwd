@@ -1,12 +1,13 @@
-(defvar save-cwd-location "~/.emacs_cwd"
-  "Location to save the current buffer directory in ")
+(defcustom save-cwd-location "~/.emacs_cwd"
+  "Location to save the current buffer directory in "
+  :type 'file :group 'editing)
 
-(defvar save-cwd-timer-period 5
+(defcustom save-cwd-timer-period 5
   "Number of seconds to wait after being idle to save the current working directory.
 
   The saving process is generally very cheap, so short values (even 1 second) sholud be fine.
-" 
-)
+"
+  :type 'integer :group 'editing)
 
 (defvar *save-cwd-timer-object* nil)
 (defvar *save-cwd-current-directory* nil)
