@@ -8,8 +8,8 @@
 " 
 )
 
-(defvar save-cwd-timer-object nil)
-(defvar save-cwd-current-directory nil)
+(defvar *save-cwd-timer-object* nil)
+(defvar *save-cwd-current-directory* nil)
 
 (defun save-cwd-buffer-directory ()
   (when buffer-file-name
@@ -18,30 +18,31 @@
 (defun save-cwd-save-directory (dirname)
   "Save the current working directory to the file from save-cwd-location"
   (with-temp-file save-cwd-location (insert dirname))
-  (setq save-cwd-current-directory save-cwd-cwd)
-)
+  (setq *save-cwd-current-directory* save-cwd-cwd))
 
 (defun save-cwd-timer ()
   "The meat of the save-cwd effort"
 
   (let ((save-cwd-cwd (save-cwd-buffer-directory)))
-    (when (and save-cwd-cwd (not (equal save-cwd-current-directory save-cwd-cwd)))
-	(save-cwd-save-directory save-cwd-cwd)
-	)))
+    (when (and save-cwd-cwd (not (equal *save-cwd-current-directory* save-cwd-cwd)))
+      (save-cwd-save-directory save-cwd-cwd))))
 
-(defun save-cwd-start ()
-  "Enables saving the current working directory to a file"
-  (interactive)
-  (when (not save-cwd-timer-object)
-    (setq save-cwd-timer-object
-	  (run-with-idle-timer save-cwd-timer-period t 'save-cwd-timer))))
+(defvar save-cwd-mode-p nil)
 
-(defun save-cwd-stop ()
-  "Stops the process of saving the current working directory to a file"
-  (when save-cwd-timer-object
-    (cancel-timer save-cwd-timer-object)
-    (setq save-cwd-timer-object nil)
-    (setq save-cwd-save-directory nil)
-    ))
+(define-minor-mode save-cwd-mode
+  "A mode to save Emacs' Current Working Directory."
+  :lighter " CWD"
+  :global t
+  :variable save-cwd-mode-p
+  (if save-cwd-mode-p
+      (progn
+        (when (not *save-cwd-timer-object*)
+          (setq *save-cwd-timer-object*
+                (run-with-idle-timer save-cwd-timer-period t 'save-cwd-timer))))
+    (progn
+      (when *save-cwd-timer-object*
+        (cancel-timer *save-cwd-timer-object*)
+        (setq *save-cwd-timer-object* nil)
+        (setq *save-cwd-current-directory* nil)))))
 
 (provide 'save-cwd)
