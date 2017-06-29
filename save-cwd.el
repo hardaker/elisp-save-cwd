@@ -12,9 +12,6 @@
 ;; License: GNU General Public License >= 2
 ;; Distribution: This file is not part of Emacs
 
-;;; Commentary:
-;; 
-
 ;;; Code:
 
 (defcustom save-cwd-location "~/.emacs_cwd"
@@ -27,8 +24,8 @@
   The saving process is generally very cheap, so short values (even 1 second) sholud be fine."
   :type 'integer :group 'editing)
 
-(defvar *save-cwd-timer-object* nil)
-(defvar *save-cwd-current-directory* nil)
+(defvar save-cwd-timer-object nil)
+(defvar save-cwd-current-directory nil)
 
 (defun save-cwd-buffer-directory ()
   "Determine the current directory."
@@ -38,12 +35,12 @@
 (defun save-cwd-save-directory (dirname)
   "Save the current working directory (DIRNAME) to the file from ‘save-cwd-location’."
   (with-temp-file save-cwd-location (insert dirname))
-  (setq *save-cwd-current-directory* save-cwd-cwd))
+  (setq save-cwd-current-directory save-cwd-cwd))
 
 (defun save-cwd-timer-function ()
   "On idle timer, save the cwd."
   (let ((save-cwd-cwd (save-cwd-buffer-directory)))
-    (when (and save-cwd-cwd (not (equal *save-cwd-current-directory* save-cwd-cwd)))
+    (when (and save-cwd-cwd (not (equal save-cwd-current-directory save-cwd-cwd)))
       (save-cwd-save-directory save-cwd-cwd))))
 
 (defvar save-cwd-mode-p nil)
@@ -55,14 +52,14 @@
   :variable save-cwd-mode-p
   (if save-cwd-mode-p
       (progn
-        (when (not *save-cwd-timer-object*)
-          (setq *save-cwd-timer-object*
+        (when (not save-cwd-timer-object)
+          (setq save-cwd-timer-object
                 (run-with-idle-timer save-cwd-timer-period t #'save-cwd-timer-function))))
     (progn
-      (when *save-cwd-timer-object*
-        (cancel-timer *save-cwd-timer-object*)
-        (setq *save-cwd-timer-object* nil)
-        (setq *save-cwd-current-directory* nil)))))
+      (when save-cwd-timer-object
+        (cancel-timer save-cwd-timer-object)
+        (setq save-cwd-timer-object nil)
+        (setq save-cwd-current-directory nil)))))
 
 (provide 'save-cwd)
 
