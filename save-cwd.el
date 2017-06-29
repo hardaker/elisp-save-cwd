@@ -12,6 +12,29 @@
 ;; License: GNU General Public License >= 2
 ;; Distribution: This file is not part of Emacs
 
+;;; Commentary:
+;;
+;;  How many times have you had to type in a long path in a shell to get
+;;  to the directory you were just editing a file while inside emacs?
+;;
+;;  Usage:
+;;
+;;  	(require 'save-cwd)
+;;      (setq save-cwd-location "~/.emacs_cwd") ;; the default
+;;      (setq save-cwd-timer-period 5)  ;; can be 1 and still be efficient, FYI
+;;      (save-cwd) ;; turns on the save-cwd minor mode
+;;
+;; Then in your shell:
+;;
+;;      # cd `cat ~/.emacs_cwd`
+;;
+;; Or even simplier, define a command for it:
+;;
+;;      # cde() {  cd `cat ~/.emacs_cwd` ; echo "changed to `cat ~/.emacs_cwd`" ; }
+;;
+;; See the package website for more details:
+;;      https://github.com/hardaker/elisp-save-cwd
+
 ;;; Code:
 
 (defcustom save-cwd-location "~/.emacs_cwd"
