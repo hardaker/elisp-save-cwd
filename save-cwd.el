@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017 Wes Hardaker
 ;; Please see the distributed LICENSE file for licencing details
 
-;; Version: 1.0
+;; Version: 20170628.01
 ;; Author: Wes Hardaker <opensource@hardakers.net>
 ;; Maintaner: Wes Hardaker
 ;; Package-Requires: ()
