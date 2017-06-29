@@ -1,12 +1,16 @@
 ;;; save-cwd.el --- Save the Current Working Directory to a file
 
-;; Copyright Goes Here
+;; Copyright (C) 2017 Wes Hardaker
+;; Please see the distributed LICENSE file for licencing details
 
-;; Author: Wes Hardacker <opensource@hardakers.net>
 ;; Version: 1.0
+;; Author: Wes Hardaker <opensource@hardakers.net>
+;; Maintaner: Wes Hardaker
 ;; Package-Requires: ()
 ;; Keywords: convenience
 ;; URL: https://github.com/hardaker/elisp-save-cwd
+;; License: GNU General Public License >= 2
+;; Distribution: This file is not part of Emacs
 
 ;;; Commentary:
 ;; 
