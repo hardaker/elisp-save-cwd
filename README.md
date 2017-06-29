@@ -10,7 +10,7 @@ to the directory you were just editing a file while inside emacs?
 	(require 'save-cwd)
 	(setq save-cwd-location "~/.emacs_cwd") ;; the default
 	(setq save-cwd-timer-period 5)  ;; can be 1 and still be efficient, FYI
-	(save-cwd-start)
+	(save-cwd) ; turns on the save-cwd minor mode
 
 ## Usage in your shell:
 
